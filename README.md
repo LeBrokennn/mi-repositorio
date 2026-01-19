@@ -29,6 +29,7 @@ No usa base de datos SQL ni MongoDB, todo se maneja con **file system**. :conten
 ---
 
 ## 📁 Estructura del proyecto
+```
 mi-repositorio
 ├── index.js
 ├── repertorio.json
@@ -36,8 +37,7 @@ mi-repositorio
 ├── package-lock.json
 ├── node_modules/
 └── public/
-
-
+```
 
 | Método | Ruta             | Descripción                             |
 | ------ | ---------------- | --------------------------------------- |
