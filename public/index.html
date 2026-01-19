@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Mi Repertorio</title>
+</head>
+<body>
+  <h1>🎼 Mi Repertorio</h1>
+
+  <input id="titulo" placeholder="titulo">
+  <input id="artista" placeholder="Artista">
+  <input id="tono" placeholder="Tono">
+  <button onclick="guardar()">Agregar</button>
+
+  <h2>Tabla de canciones 🎤</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>#</th><th>titulo</th><th>Artista</th><th>Tono</th>
+      </tr>
+    </thead>
+    <tbody id="tabla"></tbody>
+  </table>
+
+<script>
+const api = "http://localhost:3000/canciones";
+
+// Guardar canción
+async function guardar() {
+  const item = {
+    cancion: cancion.value,
+    artista: artista.value,
+    tono: tono.value
+  };
+
+  await fetch(api, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(item)
+  });
+
+  cargar();
+}
+
+// Cargar canciones
+async function cargar() {
+  const res = await fetch(api);
+  const data = await res.json();
+  tabla.innerHTML = data.map((c,i)=>
+    `<tr>
+       <td>${i+1}</td>
+       <td>${c.titulo}</td>
+       <td>${c.artista}</td>
+       <td>${c.tono}</td>
+     </tr>`
+  ).join("");
+}
+
+cargar();
+</script>
+</body>
+</html>
